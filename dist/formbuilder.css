@@ -65,3 +65,6 @@
 .response-field-date .month,.response-field-date .day,.response-field-date .year{width:50px}
 .response-field-time .hours,.response-field-time .minutes,.response-field-time .seconds{width:50px}
 .response-field-checkboxes .fb-option,.response-field-radio .fb-option{margin-bottom:5px;display:inline-block}
+/**should use line 57 -- 59's css style**/
+.response-field-zeroven input.rf-size-medium{width:300px}
+.response-field-zeroven input.rf-size-large{width:100%}

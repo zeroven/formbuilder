@@ -808,6 +808,17 @@
 
 }).call(this);
 
+//Modified by zeroven 
+(function() {
+  Formbuilder.registerField('zeroven', {
+    order: 60,
+    view: "<input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' placeholder='http://' />",
+    edit: "<%= Formbuilder.templates['edit/size']() %>",
+    addButton: "<span class=\"symbol\"><span class=\"fa fa-link\"></span></span> Zeroven"
+  });
+
+}).call(this);
+
 this["Formbuilder"] = this["Formbuilder"] || {};
 this["Formbuilder"]["templates"] = this["Formbuilder"]["templates"] || {};
 
