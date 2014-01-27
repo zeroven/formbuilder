@@ -3,10 +3,10 @@
     publishes: true,
     routine: rivets.binders.value.routine,
     bind: function(el) {
-      return el.addEventListener('input', this.publish);
+      addEvent(el,"keyup",this.publish);    
     },
     unbind: function(el) {
-      return el.removeEventListener('input', this.publish);
+      removeEvent(el,"keyup",this.publish);  
     }
   };
 
@@ -39,6 +39,7 @@
   });
 
 }).call(this);
+
 
 (function() {
   var BuilderView, EditFieldView, Formbuilder, FormbuilderCollection, FormbuilderModel, ViewFieldView, _ref, _ref1, _ref2, _ref3, _ref4,
@@ -131,9 +132,27 @@
       return this.parentView.createAndShowEditView(this.model);
     };
 
-    ViewFieldView.prototype.clear = function() {
-      this.parentView.handleFormUpdate();
-      return this.model.destroy();
+    ViewFieldView.prototype.clear = function(e) {
+      var cb, x,
+        _this = this;
+      e.preventDefault();
+      e.stopPropagation();
+      cb = function() {
+        _this.parentView.handleFormUpdate();
+        return _this.model.destroy();
+      };
+      x = Formbuilder.options.CLEAR_FIELD_CONFIRM;
+      switch (typeof x) {
+        case 'string':
+          if (confirm(x)) {
+            return cb();
+          }
+          break;
+        case 'function':
+          return x(cb);
+        default:
+          return cb();
+      }
     };
 
     ViewFieldView.prototype.duplicate = function() {
@@ -248,7 +267,9 @@
     BuilderView.prototype.events = {
       'click .js-save-form': 'saveForm',
       'click .fb-tabs a': 'showTab',
-      'click .fb-add-field-types a': 'addField'
+      'click .fb-add-field-types a': 'addField',
+      'mouseover .fb-add-field-types': 'lockLeftWrapper',
+      'mouseout .fb-add-field-types': 'unlockLeftWrapper'
     };
 
     BuilderView.prototype.initialize = function(options) {
@@ -265,17 +286,19 @@
       this.collection.bind('destroy', this.ensureEditViewScrolled, this);
       this.render();
       this.collection.reset(this.bootstrapData);
-      return this.initAutosave();
+      return this.bindSaveEvent();
     };
 
-    BuilderView.prototype.initAutosave = function() {
+    BuilderView.prototype.bindSaveEvent = function() {
       var _this = this;
       this.formSaved = true;
       this.saveFormButton = this.$el.find(".js-save-form");
       this.saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED);
-      setInterval(function() {
-        return _this.saveForm.call(_this);
-      }, 5000);
+      if (!!Formbuilder.options.AUTOSAVE) {
+        setInterval(function() {
+          return _this.saveForm.call(_this);
+        }, 5000);
+      }
       return $(window).bind('beforeunload', function() {
         if (_this.formSaved) {
           return void 0;
@@ -314,7 +337,7 @@
         if (_this.$fbLeft.data('locked') === true) {
           return;
         }
-        newMargin = Math.max(0, $(window).scrollTop());
+        newMargin = Math.max(0, $(window).scrollTop() - _this.$el.offset().top);
         maxMargin = _this.$responseFields.height();
         return _this.$fbLeft.css({
           'margin-top': Math.min(maxMargin, newMargin)
@@ -424,7 +447,7 @@
     };
 
     BuilderView.prototype.createAndShowEditView = function(model) {
-      var $newEditEl, $responseFieldEl, oldPadding;
+      var $newEditEl, $responseFieldEl;
       $responseFieldEl = this.$el.find(".fb-field-wrapper").filter(function() {
         return $(this).data('cid') === model.cid;
       });
@@ -432,10 +455,9 @@
       if (this.editView) {
         if (this.editView.model.cid === model.cid) {
           this.$el.find(".fb-tabs a[data-target=\"#editField\"]").click();
-          this.scrollLeftWrapper($responseFieldEl, (typeof oldPadding !== "undefined" && oldPadding !== null) && oldPadding);
+          this.scrollLeftWrapper($responseFieldEl);
           return;
         }
-        oldPadding = this.$fbLeft.css('padding-top');
         this.editView.remove();
       }
       this.editView = new EditFieldView({
@@ -462,7 +484,7 @@
       if (!$responseFieldEl[0]) {
         return;
       }
-      return $.scrollWindowTo($responseFieldEl.offset().top - this.$responseFields.offset().top, 200, function() {
+      return $.scrollWindowTo((this.$el.offset().top + $responseFieldEl.offset().top) - this.$responseFields.offset().top, 200, function() {
         return _this.lockLeftWrapper();
       });
     };
@@ -532,12 +554,11 @@
     Formbuilder.helpers = {
       defaultFieldAttrs: function(field_type) {
         var attrs, _base;
-        attrs = {
-          label: "Untitled",
-          field_type: field_type,
-          required: true,
-          field_options: {}
-        };
+        attrs = {};
+        attrs[Formbuilder.options.mappings.LABEL] = 'Untitled';
+        attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type;
+        attrs[Formbuilder.options.mappings.REQUIRED] = true;
+        attrs['field_options'] = {};
         return (typeof (_base = Formbuilder.fields[field_type]).defaultAttributes === "function" ? _base.defaultAttributes(attrs) : void 0) || attrs;
       },
       simple_format: function(x) {
@@ -549,6 +570,8 @@
       BUTTON_CLASS: 'fb-button',
       HTTP_ENDPOINT: '',
       HTTP_METHOD: 'POST',
+      AUTOSAVE: true,
+      CLEAR_FIELD_CONFIRM: false,
       mappings: {
         SIZE: 'field_options.size',
         UNITS: 'field_options.units',
@@ -801,8 +824,8 @@
 (function() {
   Formbuilder.registerField('website', {
     order: 35,
-    view: "<input type='text' class='rf-size-<%= rf.get(Formbuilder.options.mappings.SIZE) %>' placeholder='http://' />",
-    edit: "<%= Formbuilder.templates['edit/size']() %>",
+    view: "<input type='text' placeholder='http://' />",
+    edit: "",
     addButton: "<span class=\"symbol\"><span class=\"fa fa-link\"></span></span> Website"
   });
 
@@ -1172,3 +1195,165 @@ __p += '\n</label>\n';
 }
 return __p
 };
+
+// http://therealcrisp.xs4all.nl/upload/addEvent.html#
+/**
+  * Crossbrowser event handling functions.
+  *
+  * A set of functions to easily attach and detach event handlers to HTML elements.
+  * These functions work around the shortcomings of the traditional method ( element.onevent = function; )
+  * where only 1 handler could be attached for a certain event on the object, and mimic the DOM level 2
+  * event methods addEventListener and removeEventListener for browsers that do not support these
+  * methods (e.g. Internet Explorer) without resorting to propriety methods such as attachEvent and detachEvent
+  * that have a whole set of their own shortcomings.
+  * Created as an entry for the 'contest' at quirksmode.org: http://www.quirksmode.org/blog/archives/2005/09/addevent_recodi.html
+  *
+  * @author Tino Zijdel ( crisp@xs4all.nl )
+  * @version 1.0
+  * @date 2005-09-09
+  */
+
+
+/**
+  * addEvent
+  *
+  * Generic function to attach event listeners to HTML elements.
+  * This function does NOT use attachEvent but creates an own stack of function references
+  * in the DOM space of the element. This prevents closures and therefor possible memory leaks.
+  * Also because of the way the function references are stored they will get executed in the
+  * same order as they where attached - matching the behavior of addEventListener.
+  *
+  * @param obj The object to which the event should be attached.
+  * @param evType The eventtype, eg. 'click', 'mousemove' etcetera.
+  * @param fn The function to be executed when the event fires.
+  * @param useCapture (optional) Whether to use event capturing, or event bubbling (default).
+  */
+function addEvent(obj, evType, fn, useCapture)
+{
+  //-- Default to event bubbling
+  if (!useCapture) useCapture = false;
+
+  //-- DOM level 2 method
+  if (obj.addEventListener)
+  {
+    obj.addEventListener(evType, fn, useCapture);
+  }
+  else
+  {
+    //-- event capturing not supported
+    if (useCapture)
+    {
+      alert('This browser does not support event capturing!');
+    }
+    else
+    {
+      var evTypeRef = '__' + evType;
+
+      //-- create function stack in the DOM space of the element; seperate stacks for each event type
+      if (!obj[evTypeRef])
+      {
+        //-- create the stack if it doesn't exist yet
+        obj[evTypeRef] = [];
+
+        //-- if there is an inline event defined store it in the stack
+        var orgEvent = obj['on'+evType];
+        if (orgEvent) obj[evTypeRef][0] = orgEvent;
+
+        //-- attach helper function using the DOM level 0 method
+        obj['on' + evType] = function(e) {
+        /**
+          * IEEventHandler
+          * 
+          * IE helper function to execute the attached handlers for events.
+          * Because of the way this helperfunction is attached to the object (using the DOM level 0 method)
+          * the 'this' keyword will correctely point to the element that the handler was defined on.
+          *
+          * @param e (optional) Event object, defaults to window.event object when not passed as argument (IE).
+          */
+          e = e || window.event;
+          var evTypeRef = '__' + e.type;
+
+          //-- check if there is a custom function stack defined for this event type on the object
+          if (obj[evTypeRef])
+          {
+            //-- iterate through the stack and execute each function in the scope of the object by using function.call
+            for (var ref in obj[evTypeRef])
+            {
+              if (Function.call)
+              {
+                obj[evTypeRef][ref].call(obj, e);
+              }
+              else
+              {
+                // //-- IE 5.0 doesn't support call or apply, so use this
+                obj.__fn = obj[evTypeRef][ref];
+                obj.__fn(e);
+                obj.__fn = null;
+              }
+            }
+          }
+        };
+      }
+      else
+      {
+        //-- check if handler is not already attached, don't attach the same function twice to match behavior of addEventListener
+        for (var ref in obj[evTypeRef])
+        {
+          if (obj[evTypeRef][ref] === fn) return;
+        }
+      }
+
+      //-- add reference to the function to the stack
+      obj[evTypeRef][obj[evTypeRef].length] = fn;
+    }
+  }
+}
+
+/**
+  * removeEvent
+  *
+  * Generic function to remove previously attached event listeners.
+  *
+  * @param obj The object to which the event listener was attached.
+  * @param evType The eventtype, eg. 'click', 'mousemove' etcetera.
+  * @param fn The listener function.
+  * @param useCapture (optional) Whether event capturing, or event bubbling (default) was used.
+  */
+function removeEvent(obj, evType, fn, useCapture)
+{
+  //-- Default to event bubbling
+  if (!useCapture) useCapture = false;
+
+  //-- DOM level 2 method
+  if (obj.removeEventListener)
+  {
+    obj.removeEventListener(evType, fn, useCapture);
+  }
+  else
+  {
+    var evTypeRef = '__' + evType;
+
+    //-- Check if there is a stack of function references for this event type on the object
+    if (obj[evTypeRef])
+    {
+      //-- iterate through the stack
+      for (var ref in obj[evTypeRef])
+      {
+        //-- if function reference is found, remove it
+        if (obj[evTypeRef][ref] === fn)
+        {
+          try
+          {
+            delete obj[evTypeRef][ref];
+          }
+          catch(e)
+          {
+            obj[evTypeRef][ref] = null;
+          }
+
+          return;
+        }
+      }
+    }
+  }
+}

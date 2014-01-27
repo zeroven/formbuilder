@@ -43,9 +43,23 @@ class ViewFieldView extends Backbone.View
   focusEditView: ->
     @parentView.createAndShowEditView(@model)
 
-  clear: ->
-    @parentView.handleFormUpdate()
-    @model.destroy()
+  clear: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+
+    cb = =>
+      @parentView.handleFormUpdate()
+      @model.destroy()
+
+    x = Formbuilder.options.CLEAR_FIELD_CONFIRM
+
+    switch typeof x
+      when 'string'
+        if confirm(x) then cb()
+      when 'function'
+        x(cb)
+      else
+        cb()
 
   duplicate: ->
     attrs = _.clone(@model.attributes)
@@ -121,6 +135,8 @@ class BuilderView extends Backbone.View
     'click .js-save-form': 'saveForm'
     'click .fb-tabs a': 'showTab'
     'click .fb-add-field-types a': 'addField'
+    'mouseover .fb-add-field-types': 'lockLeftWrapper'
+    'mouseout .fb-add-field-types': 'unlockLeftWrapper'
 
   initialize: (options) ->
     {selector, @formBuilder, @bootstrapData} = options
@@ -139,16 +155,17 @@ class BuilderView extends Backbone.View
 
     @render()
     @collection.reset(@bootstrapData)
-    @initAutosave()
+    @bindSaveEvent()
 
-  initAutosave: ->
+  bindSaveEvent: ->
     @formSaved = true
     @saveFormButton = @$el.find(".js-save-form")
     @saveFormButton.attr('disabled', true).text(Formbuilder.options.dict.ALL_CHANGES_SAVED)
 
-    setInterval =>
-      @saveForm.call(@)
-    , 5000
+    unless !Formbuilder.options.AUTOSAVE
+      setInterval =>
+        @saveForm.call(@)
+      , 5000
 
     $(window).bind 'beforeunload', =>
       if @formSaved then undefined else Formbuilder.options.dict.UNSAVED_CHANGES
@@ -175,7 +192,7 @@ class BuilderView extends Backbone.View
   bindWindowScrollEvent: ->
     $(window).on 'scroll', =>
       return if @$fbLeft.data('locked') == true
-      newMargin = Math.max(0, $(window).scrollTop())
+      newMargin = Math.max(0, $(window).scrollTop() - @$el.offset().top)
       maxMargin = @$responseFields.height()
 
       @$fbLeft.css
@@ -274,10 +291,9 @@ class BuilderView extends Backbone.View
     if @editView
       if @editView.model.cid is model.cid
         @$el.find(".fb-tabs a[data-target=\"#editField\"]").click()
-        @scrollLeftWrapper $responseFieldEl, (oldPadding? && oldPadding)
+        @scrollLeftWrapper($responseFieldEl)
         return
 
-      oldPadding = @$fbLeft.css('padding-top')
       @editView.remove()
 
     @editView = new EditFieldView
@@ -297,7 +313,7 @@ class BuilderView extends Backbone.View
   scrollLeftWrapper: ($responseFieldEl) ->
     @unlockLeftWrapper()
     return unless $responseFieldEl[0]
-    $.scrollWindowTo ($responseFieldEl.offset().top - @$responseFields.offset().top), 200, =>
+    $.scrollWindowTo ((@$el.offset().top + $responseFieldEl.offset().top) - @$responseFields.offset().top), 200, =>
       @lockLeftWrapper()
 
   lockLeftWrapper: ->
@@ -341,12 +357,11 @@ class BuilderView extends Backbone.View
 class Formbuilder
   @helpers:
     defaultFieldAttrs: (field_type) ->
-      attrs =
-        label: "Untitled"
-        field_type: field_type
-        required: true
-        field_options: {}
-
+      attrs = {}
+      attrs[Formbuilder.options.mappings.LABEL] = 'Untitled'
+      attrs[Formbuilder.options.mappings.FIELD_TYPE] = field_type
+      attrs[Formbuilder.options.mappings.REQUIRED] = true
+      attrs['field_options'] = {}
       Formbuilder.fields[field_type].defaultAttributes?(attrs) || attrs
 
     simple_format: (x) ->
@@ -356,6 +371,8 @@ class Formbuilder
     BUTTON_CLASS: 'fb-button'
     HTTP_ENDPOINT: ''
     HTTP_METHOD: 'POST'
+    AUTOSAVE: true
+    CLEAR_FIELD_CONFIRM: false
 
     mappings:
       SIZE: 'field_options.size'
