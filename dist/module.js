@@ -1,10 +1,9 @@
 define(function(require, exports, module){
     //
     require('jquery');
-    console.info(111,$);
     var $ = jQuery;
     console.info(123,$);
-    
+
     require('./formbuilder');
     console.info(234);
     return;
