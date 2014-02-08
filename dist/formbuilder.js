@@ -2,11 +2,14 @@
   rivets.binders.input = {
     publishes: true,
     routine: rivets.binders.value.routine,
+    //TODO here event binding and remove used to be [add/removeEventListener],and target used to be [input],witch now dubble '/' comment !
     bind: function(el) {
-      addEvent(el,"keyup",this.publish);    
+      addEvent(el,"keyup",this.publish);
+      //return el.addEventListener('input', this.publish);  
     },
     unbind: function(el) {
       removeEvent(el,"keyup",this.publish);  
+      //return el.removeEventListener('input', this.publish);
     }
   };
 
