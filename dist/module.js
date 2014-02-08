@@ -1,8 +1,10 @@
 define(function(require, exports, module){
-	//
-	console.info(111);
-	var Formbuilder = require('./formbuilder');
-	console.info(234);
+    //
+    require('jquery');
+    var $ = jQuery;
+    console.info(111,$);
+    require('./formbuilder');
+    console.info(234);
     $(function(){
       fb = new Formbuilder({
         selector: '.fb-main',

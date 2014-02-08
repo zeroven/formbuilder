@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <title>Form Builder</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="vendor/css/vendor.css" />
+  <link rel="stylesheet" href="dist/formbuilder.css" />
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #444;
+    font-family: sans-serif;
+  }
+
+  .fb-main {
+    background-color: #fff;
+    border-radius: 5px;
+    min-height: 600px;
+  }
+
+  input[type=text] {
+    height: 26px;
+    margin-bottom: 3px;
+  }
+
+  select {
+    margin-bottom: 5px;
+    font-size: 40px;
+  }
+  </style>
+</head>
+<body>
+  <div class='fb-main'></div>
+
+  <script src="seajs/sea-debug.js"></script>
+
+  <script>// seajs 的简单配置
+    seajs.config({
+      base: "../formbuilder/",
+      alias: {
+        "jquery": "lib/jquery-1.9.0.min.js"
+      }
+    })
+    // 加载入口模块
+    seajs.use("/dist/module")
+  </script>
+  
+</body>
+</html>
