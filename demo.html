@@ -41,10 +41,16 @@
     seajs.config({
       base: "../formbuilder/",
       alias: {
-        "jquery": "lib/jquery.min.js"
+        "jquery": "lib/jquery.min.js",
+        "jquicore": "lib/jquery.ui/jquery.ui.core",
+        "draggable": "lib/jquery.ui/jquery.ui.draggable",
+        "droppable": "lib/jquery.ui/jquery.ui.droppable",
+        "mouse": "lib/jquery.ui/jquery.ui.mouse",
+        "sortable": "lib/jquery.ui/jquery.ui.sortable",
+        "widget": "lib/jquery.ui/jquery.ui.widget"
       }
     })
-    
+
     // 加载入口模块
     seajs.use("/formbuilder/dist/module")
   </script>
