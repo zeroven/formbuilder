@@ -2,14 +2,12 @@ define(function(require, exports, module){
     //
     require('jquery');
     var $ = jQuery;
-    console.info(123,$);
-    require('jquicore');
+    require('jqueryui');
     require('underscore');
     require('rivets');
     require('backbone');
 
     require('./formbuilder');
-    console.info(234);
     return;
     $(function(){
       fb = new Formbuilder({
