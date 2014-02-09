@@ -7,11 +7,11 @@ define(function(require, exports, module) {    //todo load
 require('jquery'); 
 require('jqueryui'); 
 require('underscore'); 
-var rivets = require('rivets'); 
-var Backbone = require('backbone'); 
+require('rivets'); 
+require('backbone'); 
 var $ = jQuery;
-console.info(Backbone,2468,rivets)
-debugger;
+console.info(Backbone,248)
+
 (function() {
   rivets.binders.input = {
     publishes: true,
