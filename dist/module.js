@@ -4,11 +4,6 @@ define(function(require, exports, module){
     var $ = jQuery;
     console.info(123,$);
     require('jquicore');
-    require('widget');
-    require('mouse');
-    require('draggable');
-    require('droppable');
-    require('sortable');
     require('underscore');
     require('rivets');
     require('backbone');
