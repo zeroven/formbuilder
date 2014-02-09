@@ -2,15 +2,16 @@
  * modified by caowen 2014-2-9 21:14:11 for CMD pattern use!
  */
 
-seajs.use(['jquery', 'underscore', 'rivets', 'backbone'], function($, _, Backbone ) {
+define(function(require, exports, module) {    //todo load
 
-// require('jquery'); 
-// require('jqueryui'); 
-// require('underscore'); 
-// require('rivets'); 
-// require('backbone'); 
-// var $ = jQuery;
-console.info(Backbone,2468)
+require('jquery'); 
+require('jqueryui'); 
+require('underscore'); 
+var rivets = require('rivets'); 
+var Backbone = require('backbone'); 
+var $ = jQuery;
+console.info(Backbone,2468,rivets)
+debugger;
 (function() {
   rivets.binders.input = {
     publishes: true,
