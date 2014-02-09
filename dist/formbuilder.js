@@ -1,3 +1,16 @@
+/**
+ * modified by caowen 2014-2-9 21:14:11 for CMD pattern use!
+ */
+
+define(function(require, exports, module) {    //todo load
+
+require('jquery'); 
+require('jqueryui'); 
+require('underscore'); 
+require('rivets'); 
+require('backbone'); 
+var $ = jQuery;
+
 (function() {
   rivets.binders.input = {
     publishes: true,
@@ -647,6 +660,8 @@
   }
 
 }).call(this);
+
+});
 
 (function() {
   Formbuilder.registerField('address', {
