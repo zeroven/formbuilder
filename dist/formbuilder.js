@@ -4,13 +4,12 @@
 
 define(function(require, exports, module) {    //todo load
 
-require('jquery'); 
-require('jqueryui'); 
-require('underscore'); 
-require('rivets'); 
-require('backbone'); 
-var $ = jQuery;
-console.info(Backbone,248)
+  var $ = jQuery = require('jquery');
+  require('jqueryui'); 
+  var _ = require('underscore');
+  var rivets = require('rivets'); 
+  var Backbone = require('backbone');
+console.info(Backbone,2480)
 
 (function() {
   rivets.binders.input = {

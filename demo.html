@@ -39,13 +39,37 @@
 
   <script>// seajs 的简单配置
     seajs.config({
-      base: "../formbuilder/",
+      //base: "../formbuilder/",
       alias: {
         "jquery": "lib/jquery.min.js",
         "jqueryui": "lib/jquery.ui/jquery.ui",//
         "underscore": "lib/underscore",//Underscore.js 1.5.2
         "rivets": "lib/rivets.min",//Rivets.js 0.5.13
         "backbone": "lib/backbone"//Backbone.js 1.1.0
+      },
+
+      // Add plugins
+      plugins: ['shim'],
+
+      // Configure shim for non-CMD modules
+      shim: {
+          'jquery': {
+              exports: 'jQuery'
+          },
+          'underscore': {
+            exports: '_'
+          },
+          'rivets': {
+            exports: 'rivets'
+          },
+          'backbone': {
+            deps: ['jquery', 'underscore'],
+            exports: 'Backbone'
+          },
+          'jquery-plugins': {
+              match: /jquery\.[a-z].*\.js/,
+              deps: ['jquery']
+          }
       }
     })
 
