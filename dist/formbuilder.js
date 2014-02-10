@@ -4,8 +4,8 @@
 console.info(11,this)
 (function() {
   console.info(111,this);
-console.info(parent,1111)
-
+  console.info(parent,1111)
+  // 134134
 })();
 
 
