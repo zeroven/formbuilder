@@ -1,13 +1,6 @@
 /**
  * modified by caowen 2014-2-9 21:14:11 for CMD pattern use!
  */
-console.info(11,this)
-(function() {
-  console.info(111,this);
-  console.info(parent,1111)
-  // 134134
-})();
-
 
 define(function(require, exports, module) {    //todo load
   require('jquery');
