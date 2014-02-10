@@ -1,6 +1,12 @@
 /**
  * modified by caowen 2014-2-9 21:14:11 for CMD pattern use!
  */
+console.info(11,this)
+(function() {
+console.info(1111,this)
+
+}).call(this);
+
 
 define(function(require, exports, module) {    //todo load
   require('jquery');
@@ -67,7 +73,7 @@ var _root = window;
         if (__hasProp.call(parent, key))
           child[key] = parent[key];
       }
-      console.info(22,parent)
+      console.info(child,22,parent)
       // function ctor() {
       //   this.constructor = child;
       // }
