@@ -6,7 +6,7 @@ console.info(11,this)
   console.info(111,this);
 console.info(parent,1111)
 
-}).call(window);
+}).();
 
 
 define(function(require, exports, module) {    //todo load
