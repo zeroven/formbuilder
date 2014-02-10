@@ -67,11 +67,19 @@ var _root = window;
         if (__hasProp.call(parent, key))
           child[key] = parent[key];
       }
-      function ctor() {
+      console.info(22,parent)
+      // function ctor() {
+      //   this.constructor = child;
+      // }
+      // ctor.prototype = parent.prototype;
+      // child.prototype = new ctor();
+      //Modified by caowen 2014-2-10 22:54:40 
+      var ctor = function () {
         this.constructor = child;
-      }
+      };
       ctor.prototype = parent.prototype;
-      child.prototype = new ctor();
+      child.prototype = ctor;
+
       child.__super__ = parent.prototype;
       return child;
     };
