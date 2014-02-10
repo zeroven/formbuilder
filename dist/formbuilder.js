@@ -3,9 +3,10 @@
  */
 console.info(11,this)
 (function() {
-console.info(1111,this)
+  console.info(111,this);
+console.info(parent,1111)
 
-}).call(this);
+}).call(window);
 
 
 define(function(require, exports, module) {    //todo load
