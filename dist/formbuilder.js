@@ -11,6 +11,8 @@ define(function(require, exports, module) {    //todo load
   var Backbone = require('backbone');
 console.info(Backbone,2480,$)
 
+var _root = window;
+
 (function() {
   rivets.binders.input = {
     publishes: true,
@@ -54,7 +56,7 @@ console.info(Backbone,2480,$)
     }
   });
 
-}).call(this);
+}).call(_root);
 
 
 (function() {
@@ -659,7 +661,7 @@ console.info(Backbone,2480,$)
     window.Formbuilder = Formbuilder;
   }
 
-}).call(this);
+}).call(_root);
 
 
 (function() {
@@ -670,7 +672,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-home\"></span></span> Address"
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('checkboxes', {
@@ -692,7 +694,7 @@ console.info(Backbone,2480,$)
     }
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('date', {
@@ -702,7 +704,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-calendar\"></span></span> Date"
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('dropdown', {
@@ -725,7 +727,7 @@ console.info(Backbone,2480,$)
     }
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('email', {
@@ -735,7 +737,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-envelope-o\"></span></span> Email"
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('file', {
@@ -745,7 +747,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-cloud-upload\"></span></span> File"
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('number', {
@@ -755,7 +757,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-number\">123</span></span> Number"
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('paragraph', {
@@ -769,7 +771,7 @@ console.info(Backbone,2480,$)
     }
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('price', {
@@ -779,7 +781,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-usd\"></span></span> Price"
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('radio', {
@@ -801,7 +803,7 @@ console.info(Backbone,2480,$)
     }
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('section_break', {
@@ -812,7 +814,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Break"
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('text', {
@@ -826,7 +828,7 @@ console.info(Backbone,2480,$)
     }
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('time', {
@@ -836,7 +838,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-clock-o\"></span></span> Time"
   });
 
-}).call(this);
+}).call(_root);
 
 (function() {
   Formbuilder.registerField('website', {
@@ -846,7 +848,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-link\"></span></span> Website"
   });
 
-}).call(this);
+}).call(_root);
 
 //Modified by zeroven 
 (function() {
@@ -857,7 +859,7 @@ console.info(Backbone,2480,$)
     addButton: "<span class=\"symbol\"><span class=\"fa fa-link\"></span></span> Zeroven"
   });
 
-}).call(this);
+}).call(_root);
 
 this["Formbuilder"] = this["Formbuilder"] || {};
 this["Formbuilder"]["templates"] = this["Formbuilder"]["templates"] || {};
