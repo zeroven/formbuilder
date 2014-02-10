@@ -661,7 +661,6 @@ console.info(Backbone,2480)
 
 }).call(this);
 
-});
 
 (function() {
   Formbuilder.registerField('address', {
@@ -1213,6 +1212,8 @@ __p += '\n</label>\n';
 }
 return __p
 };
+
+});
 
 // http://therealcrisp.xs4all.nl/upload/addEvent.html#
 /**
