@@ -8,7 +8,7 @@ define(function(require, exports, module){
     // require('backbone');
 
     require('./formbuilder-new');
-    return;
+    
     $(function(){
       fb = new Formbuilder({
         selector: '.fb-main',

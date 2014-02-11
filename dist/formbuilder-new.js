@@ -71,21 +71,22 @@ define(function(require, exports, module){
         if (__hasProp.call(parent, key))
           child[key] = parent[key];
       }
-      console.info(child,22,parent)
       // function ctor() {
       //   this.constructor = child;
       // }
       // ctor.prototype = parent.prototype;
       // child.prototype = new ctor();
-      //Modified by caowen 2014-2-10 22:54:40 
+      //Modified by caowen 2014-2-10 22:54:40  TODO 
       var ctor = function () {
         this.constructor = child;
       };
-      // TODO
-      // ctor.prototype = parent.prototype;
-      // child.prototype = ctor;
+      
+      if (parent) {
+        ctor.prototype = parent.prototype;
+        child.prototype = ctor;
 
-      // child.__super__ = parent.prototype;
+        child.__super__ = parent.prototype;
+      };
       return child;
     };
 
