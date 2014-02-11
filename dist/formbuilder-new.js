@@ -4,7 +4,8 @@ define(function(require, exports, module){
     // require('underscore');
     // require('rivets');
     // require('backbone');
-    var $ = require('jquery');
+    require('jquery');
+    var $ = jQuery; 
     var _ = require('underscore');
     var rivets = require('rivets'); 
     var Backbone = require('backbone');
