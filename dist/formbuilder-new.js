@@ -76,13 +76,13 @@ define(function(require, exports, module){
       // ctor.prototype = parent.prototype;
       // child.prototype = new ctor();
       //Modified by caowen 2014-2-10 22:54:40  TODO 
-      var ctor = function () {
+      function ctor() {
         this.constructor = child;
       };
 
       if (parent) {
         ctor.prototype = parent.prototype;
-        child.prototype = ctor;
+        child.prototype = new ctor();
 
         child.__super__ = parent.prototype;
       };

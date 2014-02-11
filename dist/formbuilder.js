@@ -62,11 +62,11 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
       // ctor.prototype = parent.prototype;
       // child.prototype = new ctor();
       //Modified by caowen 2014-2-10 22:54:40 
-      var ctor = function () {
+      function ctor() {
         this.constructor = child;
       };
       ctor.prototype = parent.prototype;
-      child.prototype = ctor;
+      child.prototype = new ctor();
 
       child.__super__ = parent.prototype;
       return child;
