@@ -15,7 +15,7 @@ define(function(require, exports, module){
     var _root = window;
 
     $(function(){
-      var Formbuilder = function{
+      var Formbuilder = function(){
       };
     });
 })
