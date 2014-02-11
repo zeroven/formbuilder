@@ -81,10 +81,11 @@ define(function(require, exports, module){
       var ctor = function () {
         this.constructor = child;
       };
-      ctor.prototype = parent.prototype;
-      child.prototype = ctor;
+      // TODO
+      // ctor.prototype = parent.prototype;
+      // child.prototype = ctor;
 
-      child.__super__ = parent.prototype;
+      // child.__super__ = parent.prototype;
       return child;
     };
 
