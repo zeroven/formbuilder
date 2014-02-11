@@ -2,59 +2,20 @@ define(function(require, exports, module){
     //
     require('jquery');
     var $ = jQuery;
-    require('jqueryui');
-    require('underscore');
-    require('rivets');
-    require('backbone');
+    // require('jqueryui');
+    // require('underscore');
+    // require('rivets');
+    // require('backbone');
+    require('jqueryui'); 
+    var _ = require('underscore');
+    var rivets = require('rivets'); 
+    var Backbone = require('backbone');
+    console.info(Backbone,_,$,rivets)
 
-    require('./formbuilder');
-    return;
+    var _root = window;
+
     $(function(){
-      fb = new Formbuilder({
-        selector: '.fb-main',
-        bootstrapData: [
-          {
-            "label": "Do you have a website?",
-            "field_type": "website",
-            "required": false,
-            "field_options": {},
-            "cid": "c1"
-          },
-          {
-            "label": "Please enter your clearance number",
-            "field_type": "text",
-            "required": true,
-            "field_options": {},
-            "cid": "c6"
-          },
-          {
-            "label": "Security personnel #82?",
-            "field_type": "radio",
-            "required": true,
-            "field_options": {
-                "options": [{
-                    "label": "Yes",
-                    "checked": false
-                }, {
-                    "label": "No",
-                    "checked": false
-                }],
-                "include_other_option": true
-            },
-            "cid": "c10"
-          },
-          {
-            "label": "Medical history",
-            "field_type": "file",
-            "required": true,
-            "field_options": {},
-            "cid": "c14"
-          }
-        ]
-      });
-
-      fb.on('save', function(payload){
-        //console.log(payload);
-      })
+      var Formbuilder = function{
+      };
     });
 })

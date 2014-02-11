@@ -1,15 +1,3 @@
-/**
- * modified by caowen 2014-2-9 21:14:11 for CMD pattern use!
- */
-
-define(function(require, exports, module) {    //todo load
-  require('jquery');
-  var $ = jQuery;
-  require('jqueryui'); 
-  var _ = require('underscore');
-  var rivets = require('rivets'); 
-  var Backbone = require('backbone');
-console.info(Backbone,2480,$)
 
 var _root = window;
 
@@ -1235,7 +1223,6 @@ __p += '\n</label>\n';
 return __p
 };
 
-});
 
 // http://therealcrisp.xs4all.nl/upload/addEvent.html#
 /**
