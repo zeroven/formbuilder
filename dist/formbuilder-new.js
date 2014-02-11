@@ -75,6 +75,8 @@ define(function(require, exports, module){
       // }
       // ctor.prototype = parent.prototype;
       // child.prototype = new ctor();
+      // child.__super__ = parent.prototype;
+
       //Modified by caowen 2014-2-10 22:54:40  TODO 
       function ctor() {
         this.constructor = child;
@@ -85,7 +87,9 @@ define(function(require, exports, module){
         child.prototype = new ctor();
 
         child.__super__ = parent.prototype;
-      };
+      }else{
+        conosle.info('Something is wrong here !')
+      }
       return child;
     };
 
