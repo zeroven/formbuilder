@@ -9,7 +9,7 @@ define(function(require, exports, module){
     var _ = require('underscore');
     var rivets = require('rivets'); 
     var Backbone = require('backbone');
-    console.info(1,$('.fb-main'))
+    // console.info(1,$('.fb-main'))
     // console.info(2,_)
     // console.info(3,rivets)
     // console.info(4,Backbone)
@@ -61,7 +61,6 @@ define(function(require, exports, module){
           }
         }
       });
-      console.info(5,this)
 
 
   var BuilderView, EditFieldView, Formbuilder, FormbuilderCollection, FormbuilderModel, ViewFieldView, _ref, _ref1, _ref2, _ref3, _ref4,
@@ -80,7 +79,7 @@ define(function(require, exports, module){
       var ctor = function () {
         this.constructor = child;
       };
-      
+
       if (parent) {
         ctor.prototype = parent.prototype;
         child.prototype = ctor;
