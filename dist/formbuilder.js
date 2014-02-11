@@ -1,5 +1,5 @@
 
-var _root = window;
+var _root = this; //Modified by caowen 2014-2-11 11:31:25 
 
 (function() {
   rivets.binders.input = {

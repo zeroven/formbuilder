@@ -1,11 +1,10 @@
 define(function(require, exports, module){
-    //
-    require('jquery');
-    var $ = jQuery;
+    // require('jquery');
     // require('jqueryui');
     // require('underscore');
     // require('rivets');
     // require('backbone');
+    var $ = require('jquery');
     console.info(1,$)
     var _ = require('underscore');
     console.info(2,_)
