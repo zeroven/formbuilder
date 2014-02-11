@@ -88,6 +88,7 @@ define(function(require, exports, module){
 
         child.__super__ = parent.prototype;
       }else{
+        child.__super__ = _root;
         conosle.info('Something is wrong here !')
       }
       return child;
