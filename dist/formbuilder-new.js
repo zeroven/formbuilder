@@ -99,6 +99,8 @@ define(function(require, exports, module){
     __extends(FormbuilderModel, _super);
 
     function FormbuilderModel() {
+      console.info(this,this.__super__);
+
       _ref = FormbuilderModel.__super__.constructor.apply(this, arguments);
       return _ref;
     }
