@@ -1,6 +1,4 @@
 
-var _root = this; //Modified by caowen 2014-2-11 11:31:25 
-
 (function() {
   rivets.binders.input = {
     publishes: true,
@@ -44,33 +42,13 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     }
   });
 
-}).call(_root);
+}).call(this);
 
 
 (function() {
   var BuilderView, EditFieldView, Formbuilder, FormbuilderCollection, FormbuilderModel, ViewFieldView, _ref, _ref1, _ref2, _ref3, _ref4,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function (child, parent) {
-      for (var key in parent) {
-        if (__hasProp.call(parent, key))
-          child[key] = parent[key];
-      }
-      console.info(child,22,parent)
-      // function ctor() {
-      //   this.constructor = child;
-      // }
-      // ctor.prototype = parent.prototype;
-      // child.prototype = new ctor();
-      //Modified by caowen 2014-2-10 22:54:40 
-      function ctor() {
-        this.constructor = child;
-      };
-      ctor.prototype = parent.prototype;
-      child.prototype = new ctor();
-
-      child.__super__ = parent.prototype;
-      return child;
-    };
+    __hasProp = {}.hasOwnProperty,    
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   FormbuilderModel = (function(_super) {
     __extends(FormbuilderModel, _super);
@@ -669,8 +647,13 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     window.Formbuilder = Formbuilder;
   }
 
-}).call(_root);
+}).call(this);
 
+
+/**
+ * TODO the following should be in a template file!
+ * 2014-2-17 8:52:42 by caowen
+ */
 
 (function() {
   Formbuilder.registerField('address', {
@@ -680,7 +663,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-home\"></span></span> Address"
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('checkboxes', {
@@ -702,7 +685,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     }
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('date', {
@@ -712,7 +695,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-calendar\"></span></span> Date"
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('dropdown', {
@@ -735,7 +718,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     }
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('email', {
@@ -745,7 +728,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-envelope-o\"></span></span> Email"
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('file', {
@@ -755,7 +738,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-cloud-upload\"></span></span> File"
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('number', {
@@ -765,7 +748,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-number\">123</span></span> Number"
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('paragraph', {
@@ -779,7 +762,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     }
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('price', {
@@ -789,7 +772,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-usd\"></span></span> Price"
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('radio', {
@@ -811,7 +794,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     }
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('section_break', {
@@ -822,7 +805,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Break"
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('text', {
@@ -836,7 +819,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     }
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('time', {
@@ -846,7 +829,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-clock-o\"></span></span> Time"
   });
 
-}).call(_root);
+}).call(this);
 
 (function() {
   Formbuilder.registerField('website', {
@@ -856,7 +839,7 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-link\"></span></span> Website"
   });
 
-}).call(_root);
+}).call(this);
 
 //Modified by zeroven 
 (function() {
@@ -867,8 +850,12 @@ var _root = this; //Modified by caowen 2014-2-11 11:31:25
     addButton: "<span class=\"symbol\"><span class=\"fa fa-link\"></span></span> Zeroven"
   });
 
-}).call(_root);
+}).call(this);
 
+
+/**
+ * Left Edit field
+ */
 this["Formbuilder"] = this["Formbuilder"] || {};
 this["Formbuilder"]["templates"] = this["Formbuilder"]["templates"] || {};
 
