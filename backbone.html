@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <title>Form Builder</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="vendor/css/vendor.css" />
+  <link rel="stylesheet" href="dist/formbuilder.css" />
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #444;
+    font-family: sans-serif;
+  }
+
+  .fb-main {
+    background-color: #fff;
+    border-radius: 5px;
+    min-height: 600px;
+  }
+
+  input[type=text] {
+    height: 26px;
+    margin-bottom: 3px;
+  }
+
+  select {
+    margin-bottom: 5px;
+    font-size: 40px;
+  }
+  </style>
+</head>
+<body>
+  <div class='fb-main'>
+    <section id="auction">
+      <h1>{ action.title }</h1>
+      <img rv-src="action.image.url">
+
+      <aside rv-show='auction.remaining | lt 120'>
+        <h4>Hurry up!<h4>
+        <p>This auction is ending in { auction.remaining | time }.</p>
+      </aside>
+
+      <button rv-on-click="controller.bid">Place a bid</button>
+    </section>
+  </div>
+
+  <script src="lib/jquery.min.js"></script>
+  <script src="lib/rivets.js"></script>
+
+  <script>
+
+    rivets.configure({
+      handler: function(target, event, binding) {
+        this.call(target, event, binding.view.models)
+      },
+      preloadData: false,
+      templateDelimiters: ['{', '}'],
+      prefix: 'special'
+    })
+
+    view = rivets.bind($('#auction'), {
+      auction: auctionModel,
+      controller: controllerObject
+    })
+
+    view.bind();
+
+    function auctionModel(){
+      console.info('auctionModel');
+    }
+    function controllerObject(){
+      console.info('controllerObject');
+    }
+  </script>
+  
+</body>
+</html>

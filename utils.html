@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+  <title>Form Builder</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="vendor/css/vendor.css" />
+  <link rel="stylesheet" href="dist/formbuilder.css" />
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #444;
+    font-family: sans-serif;
+  }
+
+  .fb-main {
+    background-color: #fff;
+    border-radius: 5px;
+    min-height: 600px;
+  }
+
+  input[type=text] {
+    height: 26px;
+    margin-bottom: 3px;
+  }
+
+  select {
+    margin-bottom: 5px;
+    font-size: 40px;
+  }
+  </style>
+</head>
+<body>
+  <div class='fb-main'></div>
+
+  <script src="seajs/sea-debug.js"></script>
+
+  <script>// seajs 的简单配置
+    // seajs.config({
+    //   //base: "../formbuilder/",
+    //   alias: {
+    //     "jquery": "lib/jquery.min.js",
+    //     "jqueryui": "lib/jquery.ui/jquery.ui",//
+    //     "underscore": "lib/underscore",//Underscore.js 1.5.2
+    //     "rivets": "lib/rivets",//Rivets.js 0.6.6
+    //     "backbone": "lib/backbone"//Backbone.js 1.1.0
+    //   },
+
+    //   // Add plugins
+    //   plugins: ['shim'],
+
+    //   // Configure shim for non-CMD modules
+    //   shim: {
+    //       'jquery': {
+    //           exports: 'jQuery'
+    //       },
+    //       'underscore': {
+    //         exports: '_'
+    //       },
+    //       'rivets': {
+    //         exports: 'rivets'
+    //       },
+    //       'backbone': {
+    //         deps: ['jquery', 'underscore'],
+    //         exports: 'Backbone'
+    //       },
+    //       'jquery-plugins': {
+    //           match: /jquery\.[a-z].*\.js/,
+    //           deps: ['jquery']
+    //       }
+    //   }
+    // })
+
+    // 加载入口模块
+    seajs.use("/formbuilder/js/util")
+  </script>
+  
+</body>
+</html>
